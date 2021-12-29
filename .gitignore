@@ -1,0 +1,17 @@
+# bin folder
+bin
+
+# lib folder
+lib
+
+# pycache folder
+*__pycache__*
+
+# env
+.env
+
+# vscode
+.vscode/**/*
+
+#vs-code workspace
+telegram-bot.code-workspace
