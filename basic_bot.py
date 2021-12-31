@@ -5,7 +5,8 @@ from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
 # Import available handlers
-from custom_handlers.command_handlers import start_handler, unknown_handler
+from custom_handlers.command_handlers import start_handler
+from custom_handlers.message_handlers import unknown_handler, mike_handler
 
 # Setting up logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -28,8 +29,11 @@ def main() -> None:
     updater = Updater(token=TOKEN, use_context=True)
     dispatcher = updater.dispatcher
 
-    # Handlers
+    # Command Handlers
     dispatcher.add_handler(start_handler)
+
+    # Message Handlers
+    dispatcher.add_handler(mike_handler)
 
     # Unknown handler -- needs to be last
     dispatcher.add_handler(unknown_handler)
