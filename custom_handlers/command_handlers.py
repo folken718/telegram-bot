@@ -21,3 +21,4 @@ def exchange(update: Update, context: CallbackContext) -> None:
 
 # handlers to add to the dispatcher
 start_handler = CommandHandler('start', start)
+exchange = CommandHandler('exchange', exchange)
