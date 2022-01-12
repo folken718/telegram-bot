@@ -5,7 +5,7 @@ from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
 # Import available handlers
-from custom_handlers.command_handlers import start_handler
+from custom_handlers.command_handlers import exchange, start_handler
 from custom_handlers.message_handlers import unknown_handler, mike_handler
 
 # Setting up logging
@@ -31,6 +31,7 @@ def main() -> None:
 
     # Command Handlers
     dispatcher.add_handler(start_handler)
+    dispatcher.add_handler(exchange)
 
     # Message Handlers
     dispatcher.add_handler(mike_handler)
