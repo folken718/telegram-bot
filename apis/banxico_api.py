@@ -16,7 +16,6 @@ banxicoUrl = 'https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF60653/da
 params = {'token': TOKEN}
 
 
-@lru_cache
 def get_exchange_rate_history_baxico():
     exchangeRateRaw = requests.get(banxicoUrl, params=params)
     exchangeRate = exchangeRateRaw.json()
@@ -30,6 +29,7 @@ def normilizeData(rawData):
     return dataDictionary
 
 
+@lru_cache(15)
 def get_exchange_rate_from_date(date):
     exchangeRate = get_exchange_rate_history_baxico()
     dataDictionary = normilizeData(exchangeRate['bmx']['series'][0]['datos'])
@@ -41,5 +41,5 @@ def get_exchange_rate_today():
     return get_exchange_rate_from_date(today)
 
 
-today = datetime.today().strftime('%d/%m/%Y')
-print(get_exchange_rate_from_date(today))
+# today = datetime.today().strftime('%d/%m/%Y')
+# print(get_exchange_rate_from_date(today))
