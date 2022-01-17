@@ -7,8 +7,6 @@ from datetime import datetime
 # Import decorators
 from custom_decorators.typing_decorator import send_typing_action
 
-today = datetime.today().strftime('%d/%m/%Y')
-
 
 @send_typing_action
 def start(update: Update, context: CallbackContext) -> None:
@@ -25,6 +23,7 @@ def exchange(update: Update, context: CallbackContext) -> None:
 
 @send_typing_action
 def usd(update: Update, context: CallbackContext) -> None:
+    today = datetime.today().strftime('%d/%m/%Y')
     exchange_rate = get_today_exchange_rate(currency['usd'], today)
     context.bot.send_message(
         chat_id=update.effective_chat.id, text=exchange_rate)
@@ -32,6 +31,7 @@ def usd(update: Update, context: CallbackContext) -> None:
 
 @send_typing_action
 def cad(update: Update, context: CallbackContext) -> None:
+    today = datetime.today().strftime('%d/%m/%Y')
     exchange_rate = get_today_exchange_rate(currency['cad'], today)
     context.bot.send_message(
         chat_id=update.effective_chat.id, text=exchange_rate)
