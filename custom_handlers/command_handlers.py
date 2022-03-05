@@ -37,8 +37,17 @@ def cad(update: Update, context: CallbackContext) -> None:
         chat_id=update.effective_chat.id, text=exchange_rate)
 
 
+@send_typing_action
+def btc(update: Update, context: CallbackContext) -> None:
+    today = datetime.today().strftime('%d/%m/%Y')
+    exchange_rate = get_today_exchange_rate(currency['btc'], today)
+    context.bot.send_message(
+        chat_id=update.effective_chat.id, text=exchange_rate)
+
+
 # handlers to add to the dispatcher
 start_handler = CommandHandler('start', start)
 exchange = CommandHandler('exchange', exchange)
 usd = CommandHandler('usd', usd)
 cad = CommandHandler('cad', cad)
+btc = CommandHandler('btc', btc)

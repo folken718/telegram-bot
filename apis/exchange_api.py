@@ -15,7 +15,7 @@ exchange_url = f'http://api.exchangeratesapi.io/v1/latest?access_key={TOKEN}'
 
 params = {'token': TOKEN}
 
-currency = {'usd': 'usd', 'cad': 'cad'}
+currency = {'usd': 'usd', 'cad': 'cad', 'btc': 'btc'}
 
 
 def get_day_exchange_rate():
@@ -25,11 +25,18 @@ def get_day_exchange_rate():
     return ratesDict
 
 
-def get_today_dollar_exchange_rate(dollar_type):
+def get_today_dollar_exchange_rate(exchange_type):
     ratesDict = get_day_exchange_rate()
     mxn_cad = ratesDict['MXN']/ratesDict['CAD']
     mxn_usd = ratesDict['MXN']/ratesDict['USD']
-    rate = mxn_usd if dollar_type == 'usd' else mxn_cad
+    mxn_btc = ratesDict['MXN']/ratesDict['BTC']
+    rate = 0
+    if exchange_type == 'cad':
+        rate = mxn_cad
+    elif exchange_type == 'usd':
+        rate = mxn_usd
+    elif exchange_type == 'btc':
+        rate = mxn_btc
     return "{:.2f}".format(rate)
 
 
@@ -40,5 +47,5 @@ def get_today_exchange_rate(currency_type, date):
     return msg
 
 
-# today = datetime.today().strftime('%d/%m/%Y')
-# print(get_today_exchange_rate('usd', today))
+#today = datetime.today().strftime('%d/%m/%Y')
+#print(get_today_exchange_rate('usd', today))
